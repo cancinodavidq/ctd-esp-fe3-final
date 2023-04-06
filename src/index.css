@@ -75,9 +75,29 @@ form{
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
-  width: 200px;
+  width: 100px;
   padding: 0.5rem 0.5rem 0 0.5rem;
   border: 0.5px solid rgb(136, 136, 136);
+}
+
+.card h2{
+  font-size: 12px;
+  
+}
+
+.card p{
+  font-size: 8px;
+  
+}
+
+.card link{
+  font-size: 5px;
+  
+}
+
+.card img{
+width: 100px;
+height: 100px;
 }
 
 .card:hover{
@@ -118,5 +138,78 @@ tr:nth-child(even) {
   color: white;
 }
 .dark > a {
+  color: white;
+}
+
+.light {
+  background-color: #fff;
+  color: #000;
+
+}
+
+.dark {
+  background-color: #000;
+  color: #fff;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  color: black;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  color: white;
+  background-color: black;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+nav button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: black;
+  font-size: 16px;
+  margin-right: 100px;
+}
+
+.dark {
+  background-color: black;
+  color: white;
+}
+
+.dark a {
+  color: white;
+}
+
+.dark a:hover {
+  color: black;
+  background-color: white;
+}
+
+.dark button {
   color: white;
 }

@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react';
+import { ThemeContext } from './utils/global.context';
+
 
 const Footer = () => {
+  
+const { state, toggleDarkMode } = useContext(ThemeContext);
+
   return (
-    <footer>
+    <footer className={state.isDarkMode ? 'dark' : 'light'}>
         <p>Powered by</p>
-        <img src="./img/DH.png" alt='DH-logo' />
+        <img src="./images/DH.png" alt='DH-logo' />
     </footer>
   )
 }

@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DentistContext } from "../Components/utils/global.context";
 import Card from "../Components/Card";
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import Navbar from "../Components/Navbar";
+import Footer from '../Components/Footer';
+import { ThemeContext } from '../Components/utils/global.context';
 
 const Favs = () => {
+  const { dentists } = useContext(DentistContext);
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const { state, toggleDarkMode } = useContext(ThemeContext);
 
   return (
-    <>
-      <h1>Dentists Favs</h1>
+
+    <div className={state.isDarkMode ? 'dark' : 'light'}>
+      <Navbar/>
+      <h2>Favorite Dentists</h2>
       <div className="card-grid">
-        {/* este componente debe consumir los destacados del localStorage */}
-        {/* Deberan renderizar una Card por cada uno de ellos */}
+      {favorites.map((dentist, index) => (
+      <div key={index} className={`card ${state.isDarkMode ? 'dark' : 'light'}`}>
+        <img src="./images/doctor.jpg" alt='Doctor' />
+        <h2>{dentist.name}</h2>
+        <p>{dentist.email}</p>
+        </div> 
+    ))}
       </div>
-    </>
+    <Footer/>
+    </div>
   );
 };
 

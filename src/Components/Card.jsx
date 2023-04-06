@@ -1,21 +1,49 @@
-import React from "react";
+import React, { useContext, useState} from 'react';
+import { DentistContext } from '../Components/utils/global.context';
+import '../index.css';
+import { Link } from 'react-router-dom';
+import { ThemeContext } from './utils/global.context';
 
+const Card = ({ name, email, phone }) => {
 
-const Card = ({ name, username, id }) => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
-  }
+  const { state, toggleDarkMode } = useContext(ThemeContext);
+  const { dentists } = useContext(DentistContext);
+
+  const [isFav, setIsFav] = useState(false);
+
+  const addFav = (dentist)=>{
+
+    const currentFavs = JSON.parse(localStorage.getItem("favorites")) || [];
+    const newFavs = [...currentFavs, dentist];
+
+    const isDuplicate = currentFavs.some((fav) => (
+      fav.name === dentist.name && fav.email === dentist.email && fav.phone === dentist.phone
+    ));
+
+    if (isDuplicate) {
+      alert("This dentist is already in favorites!");
+    } else {
+      const newFavs = [...currentFavs, dentist];
+      localStorage.setItem("favorites", JSON.stringify(newFavs));
+      setIsFav(true);
+    }}
 
   return (
-    <div className="card">
-        {/* En cada card deberan mostrar en name - username y el id */}
-
-        {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-
-        {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton">Add fav</button>
-    </div>
+    
+    <div className='card-grid'>
+    {dentists.map((dentist, index) => (
+      <div key={index} className={`card ${state.isDarkMode ? 'dark' : 'light'}`}>
+        <img src="./images/doctor.jpg" alt='Doctor' />
+        <h2>{dentist.name}</h2>
+        <p>{dentist.email}</p>
+  
+        <Link to={`/dentist/${dentist.id}`}>Ver detalles</Link>
+        <button onClick={() => addFav(dentist)}>⭐</button>
+      </div>
+    ))}
+  </div>
   );
 };
 
